@@ -124,14 +124,20 @@
     function showGiftMessage() {
 
       /* 💓 اهتزاز بنبضات قلب */
-      if (navigator.vibrate) {
-        navigator.vibrate([
-          220, 120,   // دقّة
-          220, 320,  // دقّة + وقفة
-          220, 120,   // دقّة
-          220        // دقّة
-        ]);
-      }
+  if (navigator.vibrate) {
+  const heartBeat = [180, 100, 180, 280, 180, 100, 180]; // نبضة واحدة
+  let count = 0;
+
+  const interval = setInterval(() => {
+    navigator.vibrate(heartBeat);
+    count++;
+
+    if (count === 5) { // ← عدد المرات
+      clearInterval(interval);
+    }
+  }, 1200); // الفاصل بين كل نبضة
+}
+
 
       /* 🎨 تغيير لون الخلفية لحظة الفتح */
       const originalBg = document.body.style.background;
