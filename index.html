@@ -11,13 +11,14 @@
       padding:16px;
       background: linear-gradient(135deg, #d699e1, #f8c3d9);
       color:#4a0a3d;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       text-align:center;
       min-height:100vh;
       display:flex;
       flex-direction:column;
       justify-content:center;
       overflow:hidden;
+      transition: background 350ms ease;
     }
 
     h1 {
@@ -84,13 +85,13 @@
     Muhammad 💜
   </p>
 
-  <!-- 🔊 غيّر الأغنية من هنا -->
+  <!-- 🎵 الأغنية (لازم song.mp3 تكون في نفس الريبو) -->
   <audio id="birthdayMusic" loop>
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // تشغيل الموسيقى (متوافق مع الموبايل)
+    /* تشغيل الموسيقى (قيود الموبايل) */
     window.addEventListener('load', () => {
       const audio = document.getElementById('birthdayMusic');
       audio.play().catch(() => {
@@ -105,7 +106,7 @@
       });
     });
 
-    // فراشات + نجوم
+    /* فراشات + نجوم */
     const symbols = ['🦋','⭐','✨','🌟'];
 
     function createFloatingSymbol() {
@@ -119,8 +120,28 @@
     }
     setInterval(createFloatingSymbol, 700);
 
-    // رسالة الهدية
+    /* Open Gift */
     function showGiftMessage() {
+
+      /* 💓 اهتزاز بنبضات قلب */
+      if (navigator.vibrate) {
+        navigator.vibrate([
+          120, 80,   // دقّة
+          120, 200,  // دقّة + وقفة
+          120, 80,   // دقّة
+          120        // دقّة
+        ]);
+      }
+
+      /* 🎨 تغيير لون الخلفية لحظة الفتح */
+      const originalBg = document.body.style.background;
+      document.body.style.background =
+        "linear-gradient(135deg, #b98fe0, #ffd3e6)";
+      setTimeout(() => {
+        document.body.style.background =
+          originalBg || "linear-gradient(135deg, #d699e1, #f8c3d9)";
+      }, 900);
+
       const box = document.createElement('div');
       box.style.position = 'fixed';
       box.style.top = '50%';
@@ -145,7 +166,7 @@
           وتكوني أقرب لربنا ❤️
         </p>
         <p>
-        بدعي وبتمني من ربنا انك تبقي ليا في يوم من الايام 
+          بدعي وبتمنى من ربنا إنك تبقي ليا في اليوم من الأيام 🤍
         </p>
         <button onclick="this.parentElement.remove()" style="
           margin-top:18px;
