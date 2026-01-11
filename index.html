@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Happy Birthday Mona</title>
+
+  <style>
+    body {
+      margin:0;
+      padding:16px;
+      background: linear-gradient(135deg, #d699e1, #f8c3d9);
+      color:#4a0a3d;
+      font-family: 'Arial', sans-serif;
+      text-align:center;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    h1 {
+      font-size:2.2em;
+      margin-bottom:0.4em;
+    }
+
+    p {
+      font-size:1.05em;
+      margin:0.5em 0;
+      line-height:1.6;
+    }
+
+    .gift, .music-btn {
+      margin:12px auto 0;
+      padding:14px;
+      background:#e8c7f8;
+      color:#4a0a3d;
+      border:2px solid #a259c7;
+      border-radius:14px;
+      font-size:1.05em;
+      font-weight:bold;
+      cursor:pointer;
+      width:100%;
+      max-width:360px;
+      transition:0.3s;
+    }
+
+    .gift:hover, .music-btn:hover {
+      background:#f6ddfb;
+    }
+
+    .float {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 7s linear infinite;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120vh) scale(0.6); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Happy Birthday Mona 💖</h1>
+
+  <p>
+    Hope your day is as amazing as you are,<br>
+    and may this year bring you all the happiness you deserve
+  </p>
+
+  <p>I prepared a little surprise for you 🎁</p>
+
+  <button class="gift" onclick="showGiftMessage()">Open your gift</button>
+
+  <p style="margin-top:1.5em;">
+    With all my respect,<br>
+    Muhammad 💜
+  </p>
+
+  <!-- 🔊 غيّر الأغنية من هنا -->
+  <audio id="birthdayMusic" loop>
+    <source src="💓(MP3).mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // تشغيل الموسيقى (متوافق مع الموبايل)
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('birthdayMusic');
+      audio.play().catch(() => {
+        const btn = document.createElement('button');
+        btn.innerText = "Play Music 🎵";
+        btn.className = "music-btn";
+        btn.onclick = () => {
+          audio.play();
+          btn.remove();
+        };
+        document.body.appendChild(btn);
+      });
+    });
+
+    // فراشات + نجوم
+    const symbols = ['🦋','⭐','✨','🌟'];
+
+    function createFloatingSymbol() {
+      const el = document.createElement('div');
+      el.className = 'float';
+      el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.fontSize = (Math.random() * 10 + 18) + 'px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 7000);
+    }
+    setInterval(createFloatingSymbol, 700);
+
+    // رسالة الهدية
+    function showGiftMessage() {
+      const box = document.createElement('div');
+      box.style.position = 'fixed';
+      box.style.top = '50%';
+      box.style.left = '50%';
+      box.style.transform = 'translate(-50%, -50%)';
+      box.style.background = '#fff';
+      box.style.padding = '24px';
+      box.style.borderRadius = '16px';
+      box.style.boxShadow = '0 0 20px rgba(0,0,0,0.3)';
+      box.style.zIndex = 10000;
+      box.style.maxWidth = '90%';
+      box.style.textAlign = 'center';
+      box.style.color = '#4a0a3d';
+      box.style.fontSize = '1em';
+
+      box.innerHTML = `
+        <p>كل سنة وإنتِ طيبة.</p>
+        <p>
+          في ناس بيفضل ليهم مكان خاص مهما الوقت يعدّي،<br>
+          وأتمنى السنة دي تديك اللي تستاهليه بجد<br>
+          وتحققي كل اللي نفسك فيه وسط أهلك وحبايبك<br>
+          وتكوني أقرب لربنا ❤️
+        </p>
+        <button onclick="this.parentElement.remove()" style="
+          margin-top:18px;
+          padding:10px 18px;
+          border:none;
+          border-radius:10px;
+          background:#e8c7f8;
+          color:#4a0a3d;
+          font-weight:bold;
+          cursor:pointer;
+        ">Close</button>
+      `;
+      document.body.appendChild(box);
+    }
+  </script>
+
+</body>
+</html>
